@@ -22,7 +22,7 @@ exports.createCustomer = async (req, res) => {
 exports.getCustomerById = async (req, res) => {
     try {
         const { customerId } = req.params;
-        const customer = await Customer.findById(customerId);
+        const customer = await Customer.findById(customerId).select('_id firstName lastName email phone');
 
         if (!customer) {
             return res.status(404).json({ error: 'Customer not found' });
@@ -36,6 +36,7 @@ exports.getCustomerById = async (req, res) => {
 
 /**
  * Get customer details by First and Last Name
+ * Returns only _id, firstName, lastName, email, and phone.
  */
 exports.getCustomerByName = async (req, res) => {
     try {
@@ -45,9 +46,9 @@ exports.getCustomerByName = async (req, res) => {
             return res.status(400).json({ error: "First name and last name are required" });
         }
 
-        const customer = await Customer.findOne({ 
-            name: `${firstName} ${lastName}` 
-        });
+        // Find customer by firstName and lastName, selecting only specific fields
+        const customer = await Customer.findOne({ firstName, lastName })
+                                      .select('_id firstName lastName email phone');
 
         if (!customer) {
             return res.status(404).json({ error: "Customer not found" });

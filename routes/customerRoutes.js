@@ -9,16 +9,16 @@ const router = express.Router();
 router.post('/create', createCustomer);
 
 /**
+ * Route to get customer details by First and Last Name
+ * @method GET /api/customers/search?firstName=John&lastName=Doe
+ */
+router.get('/customerName', getCustomerByName);
+
+/**
  * Route to get customer details by ID
  * @method GET /api/customers/:customerId
  */
 router.get('/:customerId', getCustomerById);
-
-/**
- * Route to get customer details by First and Last Name
- * @method GET /api/customers/search?firstName=John&lastName=Doe
- */
-router.get('/search', getCustomerByName);
 
 /**
  * Route to delete customer by ID
