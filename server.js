@@ -1,9 +1,5 @@
 /*
 Main File (server.js)
-
-Name: Jon Sedlak
-Class: CMPSC 421
-
 */
 
 const express = require('express');
@@ -22,11 +18,12 @@ mongoose
     .then(() => console.log('✅ MongoDB Connected'))
     .catch(err => console.error('❌ MongoDB Connection Error:', err));
 
-// API Routes
+// API Routes (routes folder)
 app.use('/api/customers', require('./routes/customerRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/payments', require('./routes/paymentRoutes'));
 
 app.get('/', (req, res) => res.send('Order System API is running'));
 
+// Start server
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
