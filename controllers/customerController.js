@@ -78,3 +78,21 @@ exports.deleteCustomer = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+/**
+ * Get all customers
+ */
+exports.getCustomers = async (req, res) => {
+    try {
+        // Fetch all customers, selecting only the necessary fields
+        const customers = await Customer.find().select('_id firstName lastName email phone');
+
+        if (!customers || customers.length === 0) {
+            return res.status(404).json({ error: 'No customers found' });
+        }
+
+        res.json(customers);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

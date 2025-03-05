@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCustomer, getCustomerById, deleteCustomer, getCustomerByName } = require('../controllers/customerController');
+const { createCustomer, getCustomerById, deleteCustomer, getCustomerByName, getCustomers } = require('../controllers/customerController');
 const router = express.Router();
 
 /**
@@ -102,5 +102,41 @@ router.get('/:customerId', getCustomerById);
  *         description: Customer not found
  */
 router.delete('/:customerId', deleteCustomer);
+
+/**
+ * @swagger
+ * /api/customers:
+ *   get:
+ *     summary: Get all customers
+ *     tags: [Customers]
+ *     responses:
+ *       200:
+ *         description: A list of all customers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: Unique customer ID
+ *                   firstName:
+ *                     type: string
+ *                     description: First name of the customer
+ *                   lastName:
+ *                     type: string
+ *                     description: Last name of the customer
+ *                   email:
+ *                     type: string
+ *                     description: Email of the customer
+ *                   phone:
+ *                     type: string
+ *                     description: Phone number of the customer
+ *       404:
+ *         description: No customers found
+ */
+router.get('/', getCustomers);
 
 module.exports = router;
