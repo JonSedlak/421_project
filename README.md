@@ -1,11 +1,11 @@
 Name: Jon Sedlak
 Class: CMPSC 421
 
-## Main file: server.js
+## Main file: app.js
 under root folder (421_project)
 in Terminal: 
 to start application:
-- node server.js
+- node app.js
 
 
 ### controllers

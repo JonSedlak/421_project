@@ -3,26 +3,103 @@ const { createCustomer, getCustomerById, deleteCustomer, getCustomerByName } = r
 const router = express.Router();
 
 /**
- * Route to create a new customer
- * @method POST /api/customers/create
+ * @swagger
+ * tags:
+ *   name: Customers
+ *   description: API endpoints for managing customers
+ */
+
+/**
+ * @swagger
+ * /api/customers/create:
+ *   post:
+ *     summary: Create a new customer
+ *     tags: [Customers]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Customer created successfully
+ *       500:
+ *         description: Server error
  */
 router.post('/create', createCustomer);
 
 /**
- * Route to get customer details by First and Last Name
- * @method GET /api/customers/search?firstName=John&lastName=Doe
+ * @swagger
+ * /api/customers/customerName:
+ *   get:
+ *     summary: Get customer by first and last name
+ *     tags: [Customers]
+ *     parameters:
+ *       - in: query
+ *         name: firstName
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: lastName
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Customer found
+ *       404:
+ *         description: Customer not found
  */
 router.get('/customerName', getCustomerByName);
 
 /**
- * Route to get customer details by ID
- * @method GET /api/customers/:customerId
+ * @swagger
+ * /api/customers/{customerId}:
+ *   get:
+ *     summary: Get customer by ID
+ *     tags: [Customers]
+ *     parameters:
+ *       - in: path
+ *         name: customerId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Customer retrieved successfully
+ *       404:
+ *         description: Customer not found
  */
 router.get('/:customerId', getCustomerById);
 
 /**
- * Route to delete customer by ID
- * @method DELETE /api/customers/:customerId
+ * @swagger
+ * /api/customers/{customerId}:
+ *   delete:
+ *     summary: Delete a customer by ID
+ *     tags: [Customers]
+ *     parameters:
+ *       - in: path
+ *         name: customerId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Customer deleted successfully
+ *       404:
+ *         description: Customer not found
  */
 router.delete('/:customerId', deleteCustomer);
 
