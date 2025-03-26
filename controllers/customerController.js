@@ -85,7 +85,7 @@ exports.deleteCustomer = async (req, res) => {
 exports.getCustomers = async (req, res) => {
     try {
         // Fetch all customers, selecting only the necessary fields
-        const customers = await Customer.find().select('_id firstName lastName email phone');
+        const customers = await Customer.find();
 
         if (!customers || customers.length === 0) {
             return res.status(404).json({ error: 'No customers found' });
