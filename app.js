@@ -22,7 +22,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: `http://localhost:${port}`,
+                url: `http://host.docker.internal:${port}`,
             },
         ],
         components: {
